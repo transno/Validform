@@ -1,6 +1,6 @@
 /*
     通用表单验证方法
-    Validform version 3.0
+    Validform version 3.1
 	For more information, you can visit www.rjboy.cn
 	By sean during April 7, 2010 - July 30, 2011
 	
@@ -15,6 +15,7 @@
 			"*6-20": /^[^\s]{6,20}$/,
 			"z2-4" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/
 		},
+		data: data, // 自己定义的data值，如FormData添加的值
 		callback:function(data){
 			//返回数据data是json格式，{"info":"demo info","status":"y"}
 			//info: 输出提示信息;
@@ -219,7 +220,7 @@
 							type: "POST",
 							dataType:"json",
 							url: $this.attr("action"),
-							data: $this.serialize(),
+							data: settings.data || $this.serialize(),
 							success: function(data){
 								$.fn.Validform.sn.showmsg(data.info,settings.tiptype,{type:2,sweep:settings.tipSweep},"alwaysshow");
 								settings.callback && (settings.callback)(data);
