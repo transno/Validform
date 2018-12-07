@@ -1,6 +1,6 @@
 /*
     通用表单验证方法
-    Validform version 3.1
+    Validform version 3.2
 	For more information, you can visit www.rjboy.cn
 	By sean during April 7, 2010 - July 30, 2011
 	
@@ -14,8 +14,7 @@
 		datatype:{//传入自定义datatype类型;
 			"*6-20": /^[^\s]{6,20}$/,
 			"z2-4" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/
-		},
-		data: data, // 自己定义的data值，如FormData添加的值
+		}
 		callback:function(data){
 			//返回数据data是json格式，{"info":"demo info","status":"y"}
 			//info: 输出提示信息;
@@ -213,14 +212,16 @@
 
 				if(flag && !posting){
 					errorobj=null;
+					console.log(1111)
 					if(settings.postonce){posting=true;}
 					if(settings.ajaxPost){
 						$.fn.Validform.sn.showmsg(tipmsg.p,settings.tiptype,{type:1,sweep:settings.tipSweep},"alwaysshow");//传入"alwaysshow"则让提示框不管当前tiptye为1还是2都弹出;
+ 						var formdata = new FormData($this[0])
 						$.ajax({
 							type: "POST",
 							dataType:"json",
 							url: $this.attr("action"),
-							data: settings.data || $this.serialize(),
+							data: formdata,
 							success: function(data){
 								$.fn.Validform.sn.showmsg(data.info,settings.tiptype,{type:2,sweep:settings.tipSweep},"alwaysshow");
 								settings.callback && (settings.callback)(data);

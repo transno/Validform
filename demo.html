@@ -10,12 +10,12 @@
 
 <body>
 <h1>提示效果一：弹出框提示</h1>
-<form class="registerform">
+<form class="registerform" action="ajax_post.php">
     <table width="100%" style="table-layout:fixed;">
         <tr>
             <td class="need" style="width:10px;">*</td>
             <td style="width:70px;">用户名：</td>
-            <td style="width:205px;"><input type="text" value="" name="name" class="inputxt" datatype="s6-18" ajaxurl="valid.php" errormsg="昵称至少6个字符,最多18个字符！" /></td>
+            <td style="width:205px;"><input type="text" value="" name="name" class="inputxt" datatype="s6-18" errormsg="昵称至少6个字符,最多18个字符！" /></td>
             <td><div class="Validform_checktip"></div></td>
         </tr>
         <tr>
@@ -41,6 +41,12 @@
             <td class="need"></td>
             <td colspan="3" class="tip">
                 <input type="checkbox" class="rt2" name="legal" id="legal" datatype="checkbox" errormsg="阅读并同意会员条款才能进入下一步！" /><label for="legal">我已阅读并同意《会员隐私条款》</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="need"></td>
+            <td colspan="3" class="tip">
+                <input type="file" class="rt2" name="file" datatype="*" id="file" />
             </td>
         </tr>
         <tr>
@@ -212,13 +218,15 @@
 <br />
 
 <script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="js/Validform_min.js"></script>
+<script type="text/javascript" src="js/Validform.js"></script>
 <script type="text/javascript">
 $(function(){
 	//$(".registerform").Validform();  //就这一行代码！下面是演示几种不同的验证效果;
 	
 	//提示效果一;
-	$(".registerform:first").Validform();
+	$(".registerform:first").Validform({
+		ajaxPost:true
+	});
 	
 	//提示效果二;
 	$(".registerform:eq(1)").Validform({
